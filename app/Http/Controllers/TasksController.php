@@ -55,18 +55,37 @@ class TasksController extends Controller
     //getでtasks/(id)/editにアクセスされた場合の更新画面表示処理
     public function edit($id)
     {
-        //
+        //idの値でタスクを検索して取得
+        $task = Task::findOrFail($id);
+        
+        //タスク編集ビューでそれを表示
+        return view("tasks.edit",[
+            "task" => $task,
+            ]);
     }
 
     //putまたはpatchでtasks/(id)にアクセスされた場合の更新処理
     public function update(Request $request, $id)
     {
-        //
+        //idの値でタスクを検索して取得
+        $task = Task::findOrFail($id);
+        //タスクを更新
+        $task->content = $request->content;
+        $task->save();
+        
+        //トップページへリダイレクト
+        return redirect("/");
     }
 
         //deleteでtasks/(id)にアクセスされた場合の削除処理
     public function destroy($id)
     {
-        //
+        //idの値でタスクを検索して取得
+        $task = Task::findOrFail($id);
+        //タスクを削除
+        $task->delete();
+        
+        //トップページへリダイレクト
+        return redirect("/");
     }
 }
