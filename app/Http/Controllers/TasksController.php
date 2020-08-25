@@ -81,10 +81,15 @@ class TasksController extends Controller
         //idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
         
+        if (\Auth::id() === $task->user_id){
         //タスク編集ビューでそれを表示
         return view("tasks.edit",[
             "task" => $task,
             ]);
+        }
+        else{
+            return redirect("/");
+        }
     }
 
     //putまたはpatchでtasks/(id)にアクセスされた場合の更新処理
