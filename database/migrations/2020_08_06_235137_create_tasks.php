@@ -17,6 +17,7 @@ class CreateTasks extends Migration
             $table->bigIncrements('id');
             $table->string("content");
             $table->timestamps();
+            
         });
     }
 
@@ -27,6 +28,7 @@ class CreateTasks extends Migration
      */
     public function down()
     {
+        
         Schema::dropIfExists('tasks');
     }
 }
